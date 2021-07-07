@@ -86,6 +86,7 @@ def begin_work():
             start_time = time.time()
             key_dict[key]['start_time'] = start_time
             key_dict[key]['key_pressed'] = True
+            print("Started timing for", chr(key))
         elif key in key_dict and key_dict[key]['key_pressed']:
             # If the key is being pressed for a second time,
             # we stop our timer and calculate the total time it
@@ -100,7 +101,7 @@ def begin_work():
             # Set our timer to False to stop timing
             key_dict[key]['key_pressed'] = False
         else:
-            print(f"{chr(key)} was not added at the start!")
+            print(f"{chr(key)} is an invalid action!")
 
 
 if __name__ == "__main__":
