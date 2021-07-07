@@ -1,5 +1,6 @@
 import time
 from msvcrt import getch
+from threading import Thread
 
 # Store the associated key, its start time, total time, and whether it was
 # pressed or not.
@@ -62,7 +63,23 @@ def is_timing():
     return True
 
 
+def live_timer(key):
+    my_key = key_dict[key]
+    total_time = my_key['total_time']
+    print()
+    while True:
+        if not my_key['key_pressed']:
+            break
+
+        time_format = '{:.6g}'.format(total_time)
+        
+        print(chr(key), time_format, end='\r')
+        time.sleep(1)
+        total_time += 1
+
+
 def begin_work():
+    threads = {}
     print("""When ready, press the key you want and the timer will begin for that action.
              When you're done, press the same key to stop the timer for that action.
              Press ESC to quit.""")
@@ -86,6 +103,10 @@ def begin_work():
             start_time = time.time()
             key_dict[key]['start_time'] = start_time
             key_dict[key]['key_pressed'] = True
+
+            new_thread = Thread(target=live_timer, args=(key,))
+            threads[key] = new_thread
+            new_thread.start()
         elif key in key_dict and key_dict[key]['key_pressed']:
             # If the key is being pressed for a second time,
             # we stop our timer and calculate the total time it
@@ -94,11 +115,14 @@ def begin_work():
             end_time = time.time()
             key_dict[key]['total_time'] += end_time - start_time
 
+            # Set our timer to False to stop timing
+            key_dict[key]['key_pressed'] = False
+            threads[key].join()
+
             # Print the time, but format it to 6 sig figs
             print(f"\nTime for {chr(key)}", "{:.6g}".format(key_dict[key]['total_time']))
 
-            # Set our timer to False to stop timing
-            key_dict[key]['key_pressed'] = False
+            
         else:
             print(f"{chr(key)} was not added at the start!")
 
