@@ -12,9 +12,13 @@ Current requirements are Python3 and a Windows environment. Support for Linux an
 
 ```
 git clone https://github.com/Sjs445/Rat-Timers.git
+```
 
+```
 cd Rat-Timers
+```
 
+```
 python3 main.py
 ```
 
@@ -46,6 +50,9 @@ You can also press 9 to check if there are active timers.
 Now if you press b or t you will begin timing those actions. Press b or t a second time to stop timing those actions.
 
 ```
+Started timing for b
+Started timing for t
+
 Time for t 5.21666
 
 Time for b 7.7127

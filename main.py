@@ -3,7 +3,7 @@ from msvcrt import getch
 
 # Store the associated key, its start time, total time, and whether it was
 # pressed or not.
-# {'b':
+# {'key':
 #      {'total_time': float,
 #       'start_time': float,
 #       'key_pressed': bool
@@ -13,6 +13,9 @@ key_dict = {}
 
 
 def main():
+    """
+    Main execution of the program.
+    """
     get_actions()
     begin_work()
 
@@ -24,6 +27,9 @@ def main():
 
 
 def get_actions():
+    """
+    Retrieve keys through input to represent timers.
+    """
     print("Enter as many keys as you want to represent an action (ESC to finish)\n")
     while True:
         key = ord(getch())
@@ -63,6 +69,10 @@ def is_timing():
 
 
 def begin_work():
+    """
+    The timer portion of the program.
+    Uses the difference in time.time() to calculate time in between presses.
+    """
     print("""When ready, press the key you want and the timer will begin for that action.
              When you're done, press the same key to stop the timer for that action.
              Press ESC to quit.""")
@@ -84,13 +94,16 @@ def begin_work():
             # If the key is being pressed for the first time,
             # we get the start time and set our timer to start.
             start_time = time.time()
+
             key_dict[key]['start_time'] = start_time
             key_dict[key]['key_pressed'] = True
+
             print("Started timing for", chr(key))
         elif key in key_dict and key_dict[key]['key_pressed']:
             # If the key is being pressed for a second time,
             # we stop our timer and calculate the total time it
             # took in between presses.
+            
             start_time = key_dict[key]['start_time']
             end_time = time.time()
             key_dict[key]['total_time'] += end_time - start_time
