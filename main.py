@@ -1,5 +1,13 @@
 import time
-from msvcrt import getch
+import os
+
+OPERATING_SYS = os.name
+
+if OPERATING_SYS == 'nt':
+    from msvcrt import getch
+elif OPERATING_SYS == 'posix':
+    from readchar import readchar
+
 
 # Store the associated key, its start time, total time, and whether it was
 # pressed or not.
@@ -17,13 +25,13 @@ def main():
     Main execution of the program.
     """
     get_actions()
-    begin_work()
+    begin_timing()
 
     print("\n\nTotal time for individual actions")
     for key in key_dict:
         print(f"{chr(key)}", "{:.6g}".format(key_dict[key]['total_time']))
 
-    input()
+    input("\nPress ENTER to terminate the program...")
 
 
 def get_actions():
@@ -32,9 +40,15 @@ def get_actions():
     """
     print("Enter as many keys as you want to represent an action (ESC to finish)\n")
     while True:
-        key = ord(getch())
+        if OPERATING_SYS == 'nt':
+            key = ord(getch())
+        elif OPERATING_SYS == 'posix':
+            key = ord(readchar())
 
         if key == 27:  # ESC
+            if not key_dict:
+                print("You haven't added any keys yet.")
+                continue
             break
 
         key_dict[key] = {
@@ -68,17 +82,20 @@ def is_timing():
     return True
 
 
-def begin_work():
+def begin_timing():
     """
     The timer portion of the program.
     Uses the difference in time.time() to calculate time in between presses.
     """
-    print("""When ready, press the key you want and the timer will begin for that action.
-             When you're done, press the same key to stop the timer for that action.
-             Press ESC to quit.""")
-    print("You can also press 9 to check if there are active timers.")
+    print("""\nWhen ready, press the key you want and the timer will begin for that action.
+When you're done, press the same key to stop the timer for that action.
+Press ESC to quit.""")
+    print("You can also press 9 to check if there are active timers.\n")
     while True:
-        key = ord(getch())
+        if OPERATING_SYS == 'nt':
+            key = ord(getch())
+        elif OPERATING_SYS == 'posix':
+            key = ord(readchar())
 
         if key == 27 and is_timing():
             break
