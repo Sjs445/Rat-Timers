@@ -1,12 +1,27 @@
 import time
 import os
+import sys
 
+# Do an initial OS check for imports
 OPERATING_SYS = os.name
 
 if OPERATING_SYS == 'nt':
     from msvcrt import getch
 elif OPERATING_SYS == 'posix':
     from readchar import readchar
+else:
+    print("Your OS is not supported", file=sys.stderr)
+    sys.exit(1)
+
+
+def determine_read():
+    """
+    returns the correct read key method to use based on the OS.
+    """
+    if os.name == "nt":
+        return ord(getch())
+    elif os.name == "posix":
+        return ord(readchar())
 
 
 # Store the associated key, its start time, total time, and whether it was
@@ -31,7 +46,12 @@ def main():
     for key in key_dict:
         print(f"{chr(key)}", "{:.6g}".format(key_dict[key]['total_time']))
 
-    input("\nPress ENTER to terminate the program...")
+    print("Press ENTER to run again OR any other key to quit...")
+    key = determine_read()
+    
+    if key == 13:  # ENTER KEY
+        key_dict.clear()
+        main()
 
 
 def get_actions():
@@ -40,10 +60,7 @@ def get_actions():
     """
     print("Enter as many keys as you want to represent an action (ESC to finish)\n")
     while True:
-        if OPERATING_SYS == 'nt':
-            key = ord(getch())
-        elif OPERATING_SYS == 'posix':
-            key = ord(readchar())
+        key = determine_read()
 
         if key == 27:  # ESC
             if not key_dict:
@@ -92,10 +109,7 @@ When you're done, press the same key to stop the timer for that action.
 Press ESC to quit.""")
     print("You can also press 9 to check if there are active timers.\n")
     while True:
-        if OPERATING_SYS == 'nt':
-            key = ord(getch())
-        elif OPERATING_SYS == 'posix':
-            key = ord(readchar())
+        key = determine_read()
 
         if key == 27 and is_timing():
             break
