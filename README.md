@@ -6,7 +6,9 @@ This console app was designed specifically to time any actions an experimental r
 
 ## Requirements
 
-Current requirements are Python3 and a Windows environment. Support for Linux and Mac is on the way.
+Current requirements is just Python3.
+
+If you are on Mac/Linux you will need to run the install.sh file.
 
 ## Download and Run
 
@@ -22,7 +24,7 @@ cd Rat-Timers
 python3 main.py
 ```
 
-Or click the green code button and then click Download ZIP. Extract the files and then double click the main.py file.
+Or click the green code button and then click Download ZIP. Extract the files and then double click the main.py file or the run.sh file.
 
 
 ## How it works
