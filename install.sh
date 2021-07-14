@@ -1,2 +1,3 @@
 #!/bin/sh
-pip3 install -r requirements.txt
+DIR="$( cd "$( dirname "$0" )" && pwd )"
+pip3 install -r "$DIR/requirements.txt"
