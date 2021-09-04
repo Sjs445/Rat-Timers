@@ -33,6 +33,7 @@ def determine_read():
 #       }
 # }
 key_dict = {}
+space_counter = 0
 
 
 def main():
@@ -45,6 +46,7 @@ def main():
     print("\n\nTotal time for individual actions")
     for key in key_dict:
         print(f"{chr(key)}", "{:.6g}".format(key_dict[key]['total_time']))
+    print("Counter: ", space_counter)
 
     print("Press ENTER to run again OR any other key to quit...")
     key = determine_read()
@@ -67,6 +69,9 @@ def get_actions():
                 print("You haven't added any keys yet.")
                 continue
             break
+        elif key == 32:  # SPACE
+            print("Can not add SPACE key as a timer because that key is reserved for counting.\n")
+            continue
 
         key_dict[key] = {
             'total_time': 0,
@@ -80,11 +85,14 @@ def print_pressed_keys():
     """
     Prints any active timers
     """
+    print("==================")
     print("Active timers:")
     print("==================")
     for key in key_dict:
         if key_dict[key]['key_pressed']:
             print(chr(key))
+    print("==================")
+    print("Counter: ", space_counter)
     print("==================")
 
 
@@ -104,6 +112,7 @@ def begin_timing():
     The timer portion of the program.
     Uses the difference in time.time() to calculate time in between presses.
     """
+    global space_counter
     print("""\nWhen ready, press the key you want and the timer will begin for that action.
 When you're done, press the same key to stop the timer for that action.
 Press ESC to quit.""")
@@ -119,6 +128,10 @@ Press ESC to quit.""")
             continue
         elif key == 57:
             print_pressed_keys()
+            continue
+        elif key == 32:  # SPACE KEY
+            space_counter += 1
+            print("Counter increased:", space_counter)
             continue
 
         if key in key_dict and not key_dict[key]['key_pressed']:
