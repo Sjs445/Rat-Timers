@@ -43,10 +43,11 @@ In the example above we pressed 'b' and then 't' to denote we want to time how l
 After you press escape you can begin timing.
 
 ```
-When ready, press the key you want and the timer will begin for that action.
-             When you're done, press the same key to stop the timer for that action.
-             Press ESC to quit.
-You can also press 9 to check if there are active timers.
+1. Press the key you want and the timer will begin for that action.
+2. Press the same key to stop the timer for that action.
+3. Press the SPACE key to increment a timer.
+4. Press ESC to quit.
+5. Press 9 to check if there are active timers.
 ```
 
 Now if you press b or t you will begin timing those actions. Press b or t a second time to stop timing those actions.
@@ -60,12 +61,21 @@ Time for t 5.21666
 Time for b 7.7127
 ```
 
+You can also press SPACE to increment a timer:
+```
+Counter increased: 1
+Counter increased: 2
+Counter increased: 3
+Counter increased: 4
+```
+
 By pressing escape you will end the program and it will give you the total time recorded for each action.
 
 ```
 Total time for individual actions
 b 7.7127
 t 5.21666
+Counter:  4
 ```
 
 ## Author
