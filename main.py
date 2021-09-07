@@ -113,10 +113,11 @@ def begin_timing():
     Uses the difference in time.time() to calculate time in between presses.
     """
     global space_counter
-    print("""\nWhen ready, press the key you want and the timer will begin for that action.
-When you're done, press the same key to stop the timer for that action.
-Press ESC to quit.""")
-    print("You can also press 9 to check if there are active timers.\n")
+    print("""\n1. Press the key you want and the timer will begin for that action.
+2. Press the same key to stop the timer for that action.
+3. Press the SPACE key to increment a timer.
+4. Press ESC to quit.""")
+    print("5. You can also press 9 to check if there are active timers.\n")
     while True:
         key = determine_read()
 
