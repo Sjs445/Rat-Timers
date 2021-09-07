@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import time
 import os
 import sys
@@ -53,6 +54,7 @@ def main():
     
     if key == 13:  # ENTER KEY
         key_dict.clear()
+        print("\n")
         main()
 
 
