@@ -117,7 +117,7 @@ def begin_timing():
 2. Press the same key to stop the timer for that action.
 3. Press the SPACE key to increment a timer.
 4. Press ESC to quit.""")
-    print("5. You can also press 9 to check if there are active timers.\n")
+    print("5. Press 9 to check if there are active timers.\n")
     while True:
         key = determine_read()
 
