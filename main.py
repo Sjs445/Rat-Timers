@@ -41,6 +41,7 @@ def main():
     """
     Main execution of the program.
     """
+    global space_counter
     get_actions()
     begin_timing()
 
@@ -54,6 +55,7 @@ def main():
     
     if key == 13:  # ENTER KEY
         key_dict.clear()
+        space_counter = 0
         print("\n")
         main()
 
