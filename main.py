@@ -50,7 +50,16 @@ def main():
         print(f"{chr(key)}", "{:.6g}".format(key_dict[key]['total_time']))
     print("Counter: ", space_counter)
 
-    print("Press ENTER to run again OR any other key to quit...")
+    # Check if we're restarting or quitting
+    is_restarting()
+
+
+def is_restarting():
+    """
+    Determines if we are restarting the program or exiting.
+    """
+    global space_counter
+    print("Press ENTER to run again OR ESC to quit...")
     key = determine_read()
     
     if key == 13:  # ENTER KEY
@@ -58,6 +67,10 @@ def main():
         space_counter = 0
         print("\n")
         main()
+    elif key == 27: # ESC
+        return
+    else:
+        is_restarting()
 
 
 def get_actions():
