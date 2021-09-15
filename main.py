@@ -132,7 +132,7 @@ def begin_timing():
     global space_counter
     print("""\n1. Press the key you want and the timer will begin for that action.
 2. Press the same key to stop the timer for that action.
-3. Press the SPACE key to increment a timer.
+3. Press the SPACE key to increment a counter.
 4. Press ESC to quit.""")
     print("5. Press 9 to check if there are active timers.\n")
     while True:
