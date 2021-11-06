@@ -61,7 +61,7 @@ Time for t 5.21666
 Time for b 7.7127
 ```
 
-You can also press SPACE to increment a timer:
+You can also press SPACE to increment a counter:
 ```
 Counter increased: 1
 Counter increased: 2
